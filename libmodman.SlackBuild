@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Slackware build script for libmodman
-# Copyright (C) 2010,2011 Georgi D. Sotirov <gdsotirov@dir.bg>
+# Copyright (C) 2010-2012 Georgi D. Sotirov <gdsotirov@dir.bg>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -19,10 +19,10 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: libmodman.SlackBuild,v 1.2 2011/02/12 18:14:32 gsotirov Exp $
+# $Id: libmodman.SlackBuild,v 1.3 2012/01/22 18:47:00 gsotirov Exp $
 #
 
-. ../slack-package.conf
+. ../../slack-package.conf
 
 NAME=libmodman
 VERSION=2.0.1
@@ -51,19 +51,23 @@ mkdir -p $PKG
 
 # Extract the source
 cd $TMP
-tar -zxvf $CWD/$NAME-$VERSION.tar.gz || exit 1
+tar -xvf $CWD/$NAME-$VERSION.tar.gz || exit 3
 cd $SRC
 fix_source
 
 # Configure
-cmake -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
-      -DCMAKE_INSTALL_PREFIX=/usr
+cmake -LAH \
+      -DCMAKE_C_FLAGS="$SLKCFLAGS" \
+      -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DLIB_INSTALL_DIR=/usr/lib${LIBDIRSUFFIX} || exit 4
 
 # Build
-make -j4 all || exit 3
+make -j4 all || exit 5
 
 # Install
-make DESTDIR=$PKG install || exit 3
+make DESTDIR=$PKG install || exit 6
 
 # Prepare
 bin_perms $PKG
