@@ -1,11 +1,11 @@
 libmodman: libmodman (a simple library for managing modules)
 libmodman:
 libmodman: libmodman is a simple library for managing modules. It's used and
-libmodman: developped from libproxy.
+libmodman: developed from libproxy.
 libmodman:
 libmodman:
 libmodman:
 libmodman:
 libmodman:
 libmodman:
-libmodman: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
+libmodman: Packaged by Georgi D. Sotirov <gdsotirov@gmail.com>
